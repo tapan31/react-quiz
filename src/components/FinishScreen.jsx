@@ -21,7 +21,7 @@ export default function FinishScreen({
       </p>
       <p className="highscore">(Highscore: {highscore} points)</p>
       <button
-        className="btn btn-ui"
+        className="btn btn-ui btn-restart"
         onClick={() => dispatch({ type: "restart" })}
       >
         Restart

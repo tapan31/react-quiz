@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Codystar&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Rubik+Doodle+Shadow&display=swap");
 
 :root {
   --color-darkest: #343a40;
@@ -9,7 +10,8 @@
   --color-theme: #1098ad;
   /* --color-theme: #6df6d6; */
   /* --color-accent: #ffa94d; */
-  --color-accent: #ff2200;
+  /* --color-accent: #ff2200; */
+  --color-accent: #c34936;
 }
 
 * {
@@ -68,7 +70,9 @@ img {
 }
 
 h1 {
-  font-family: "Codystar";
+  /* font-family: "Codystar"; */
+  font-family: "Rubik Doodle Shadow", system-ui;
+  word-spacing: 0.8rem;
   font-size: 5.6rem;
 }
 
@@ -98,8 +102,17 @@ h4 {
   white-space: nowrap;
 }
 
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
 .progress {
   margin-bottom: 4rem;
+  width: 100%;
   display: grid;
   justify-content: space-between;
   gap: 1.2rem;
@@ -149,8 +162,29 @@ progress {
   cursor: not-allowed;
 }
 
+.btn-start {
+  margin-top: 3rem;
+  font-weight: bold;
+  width: 100%;
+}
+
+.btn-start:hover {
+  box-shadow: 0 0 5px var(--color-medium);
+}
+
 .btn-ui {
   float: right;
+}
+
+.btn-ui-left {
+  display: block;
+  float: left;
+  margin-bottom: 2rem;
+}
+
+.btn-quiz-history {
+  padding: 1rem;
+  font-size: 1.7rem;
 }
 
 .options {
@@ -216,11 +250,13 @@ progress {
 
 .timer {
   float: left;
+  clear: left;
   font-size: 1.8rem;
-  color: var(--color-medium);
+  color: var(--color-dark);
   border: 2px solid var(--color-dark);
   padding: 1.35rem 2.8rem;
   border-radius: 100px;
+  background-color: var(--color-light);
 }
 
 /* CREDIT: https://dev.to/afif/i-made-100-css-loaders-for-your-next-project-4eje */
@@ -268,6 +304,131 @@ progress {
   padding: 0.8rem;
 }
 
+/* ---------------------------------- */
+.user {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+}
+
+.num-questions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin: 0 auto 3rem;
+  width: 100%;
+}
+
+label {
+  font-size: 2.2rem;
+}
+
+select {
+  padding: 1rem 1.5rem;
+  border-radius: 2rem;
+  width: 30%;
+  font-size: 2rem;
+  text-align: justify;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  border: 2px solid var(--color-dark);
+  cursor: pointer;
+}
+
+option {
+  font-size: 2rem;
+}
+
+input {
+  display: inline-block;
+  width: 30%;
+  padding: 1rem 1.5rem;
+  border-radius: 2rem;
+  border: 2px solid var(--color-dark);
+  outline: none;
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  font-size: 2rem;
+}
+
+input:focus {
+  outline: none;
+}
+
+.choose-difficulty {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin: 0 auto 2rem;
+  width: 100%;
+}
+
+.quiz-history {
+  /* margin: 10rem 0 0; */
+  padding: 1.5rem;
+  color: var(--color-light);
+}
+
+.quiz-history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10rem 0 3rem;
+}
+
+.quiz-history-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 2rem;
+}
+
+.quiz-history-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  background-color: var(--color-dark);
+  border-radius: 1rem;
+  max-width: 100%;
+  width: 20rem;
+  font-size: 1.5rem;
+  box-shadow: 0 0 3px var(--color-medium);
+}
+
+.username {
+  margin: 0 0 0.7rem;
+  padding: 0 0 0.5rem;
+  border-bottom: 2px solid var(--color-light);
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+}
+
+.date {
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+.bold {
+  font-weight: bold;
+  color: var(--color-medium);
+}
+
+.ms {
+  margin-left: 0.3rem;
+}
+
+/* Responsive (Mobile) */
 @media screen and (max-width: 680px) {
   body {
     padding: 2rem;
@@ -317,5 +478,40 @@ progress {
     align-items: center;
     justify-content: center;
     gap: 3rem;
+  }
+
+  label {
+    font-size: 1.8rem;
+  }
+
+  input {
+    width: 35%;
+    font-size: 1.5rem;
+  }
+
+  select {
+    width: 35%;
+    font-size: 1.5rem;
+  }
+
+  option {
+    font-size: 1.3rem;
+  }
+
+  .quiz-history-container {
+    place-items: center;
+    grid-template-columns: 1fr;
+  }
+
+  .quiz-history-header {
+    margin-top: 5rem;
+  }
+
+  .quiz-history-card {
+    width: 100%;
+  }
+
+  .btn-restart {
+    width: 50%;
   }
 }
