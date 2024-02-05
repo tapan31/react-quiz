@@ -25,6 +25,8 @@ import QuizHistory from "./QuizHistory";
   },
 ]; */
 
+const BASE_URL = "https://uninterested-jeans-mite.cyclic.app";
+
 const options = {
   day: "2-digit",
   weekday: "short",
@@ -118,7 +120,7 @@ function reducer(state, action) {
       };
 
     case "finish":
-      fetch("https://react-quiz-a2hu.onrender.com/highscore", {
+      fetch(`${BASE_URL}/highscore`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -242,8 +244,8 @@ function App() {
   */
   useEffect(() => {
     Promise.all([
-      fetch("https://react-quiz-a2hu.onrender.com/questions"),
-      fetch("https://react-quiz-a2hu.onrender.com/highscore"),
+      fetch(`${BASE_URL}/questions`),
+      fetch(`${BASE_URL}/highscore`),
     ])
       .then(([resQuestions, resHighscore]) =>
         Promise.all([resQuestions.json(), resHighscore.json()])
