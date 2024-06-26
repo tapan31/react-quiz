@@ -15,7 +15,6 @@ import Footer from "./Footer";
 import Timer from "./Timer";
 import PreviousButton from "./PreviousButton";
 import QuizHistory from "./QuizHistory";
-import { useQuiz } from "../contexts/QuizContext";
 
 /* const dummyHistory = [
   {
@@ -26,7 +25,7 @@ import { useQuiz } from "../contexts/QuizContext";
   },
 ]; */
 
-/* const BASE_URL = "https://uninterested-jeans-mite.cyclic.app";
+const BASE_URL = "https://uninterested-jeans-mite.cyclic.app";
 
 const options = {
   day: "2-digit",
@@ -36,9 +35,9 @@ const options = {
   hour: "2-digit",
   minute: "2-digit",
   second: "2-digit",
-}; */
+};
 
-/* const initialState = {
+const initialState = {
   questions: [],
   filteredQuestions: [],
   // 'loading', 'error', 'ready', 'active', 'finished',
@@ -52,11 +51,11 @@ const options = {
   highscore: 0,
   secondsRemaining: null,
   quizHistory: [],
-}; */
+};
 
-// const SECS_PER_QUESTION = 30;
+const SECS_PER_QUESTION = 30;
 
-/* function reducer(state, action) {
+function reducer(state, action) {
   switch (action.type) {
     case "dataReceived":
       let prevQuizData = null;
@@ -163,7 +162,7 @@ const options = {
         index: 0,
         points: 0,
         secondsRemaining: 10,
-      }; 
+      }; */
       return {
         ...initialState,
         questions: state.questions,
@@ -205,10 +204,10 @@ const options = {
     default:
       throw new Error(`Unknown Action - ${action.type}`);
   }
-} */
+}
 
 function App() {
-  /* const [
+  const [
     {
       questions,
       filteredQuestions,
@@ -224,7 +223,11 @@ function App() {
       quizHistory,
     },
     dispatch,
-  ] = useReducer(reducer, initialState); */
+  ] = useReducer(reducer, initialState);
+
+  const maxPossiblePoints =
+    numQuestions > 0 &&
+    filteredQuestions.reduce((acc, question) => acc + question.points, 0);
 
   /*  useEffect(() => {
     fetch("http://localhost:3001/questions")
@@ -239,7 +242,7 @@ function App() {
   /* 
   The Promise.all method in JavaScript takes an array of promises and returns a new promise. This new promise fulfills with an array of the fulfilled values of the input promises, in the same order as the input promises. If any of the input promises is rejected, the entire Promise.all is rejected with the reason of the first rejected promise.
   */
-  /* useEffect(() => {
+  useEffect(() => {
     Promise.all([
       fetch(`${BASE_URL}/questions`),
       fetch(`${BASE_URL}/highscore`),
@@ -255,13 +258,7 @@ function App() {
         // console.log(dataQuestions, dataHighscore);
       })
       .catch((error) => dispatch({ type: "dataFailed" }));
-  }, []); */
-
-  const { status, quizHistory } = useQuiz();
-
-  /* const maxPossiblePoints =
-    numQuestions > 0 &&
-    filteredQuestions.reduce((acc, question) => acc + question.points, 0); */
+  }, []);
 
   return (
     <div className="app">
@@ -271,24 +268,53 @@ function App() {
         {status === "error" && <Error />}
         {status === "ready" && (
           <>
-            <StartScreen />
+            <StartScreen
+              username={username}
+              numQuestions={numQuestions}
+              difficulty={difficulty}
+              dispatch={dispatch}
+              highscore={highscore}
+            />
           </>
         )}
         {status === "active" && (
           <>
-            <Progress />
-            <Question />
+            <Progress
+              index={index}
+              numQuestions={numQuestions}
+              maxPossiblePoints={maxPossiblePoints}
+              points={points}
+              answer={answers[index] ?? null}
+            />
+            <Question
+              question={filteredQuestions[index]}
+              answer={answers[index] ?? null}
+              dispatch={dispatch}
+            />
             <Footer>
-              <PreviousButton />
-              <NextButton />
-              <Timer />
+              <PreviousButton index={index} dispatch={dispatch} />
+              <NextButton
+                dispatch={dispatch}
+                answer={answers[index] ?? null}
+                index={index}
+                numQuestions={numQuestions}
+                quizHistory={quizHistory}
+              />
+              <Timer secondsRemaining={secondsRemaining} dispatch={dispatch} />
             </Footer>
           </>
         )}
         {status === "finished" && (
           <>
-            <FinishScreen />
-            {quizHistory.length > 0 && <QuizHistory />}
+            <FinishScreen
+              points={points}
+              maxPossiblePoints={maxPossiblePoints}
+              highscore={highscore}
+              dispatch={dispatch}
+            />
+            {quizHistory.length > 0 && (
+              <QuizHistory quizHistory={quizHistory} dispatch={dispatch} />
+            )}
           </>
         )}
       </Main>

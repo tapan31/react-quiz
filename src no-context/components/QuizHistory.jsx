@@ -1,8 +1,4 @@
-import { useQuiz } from "../contexts/QuizContext";
-
-export default function QuizHistory() {
-  const { quizHistory, dispatch, setQuizHistory } = useQuiz();
-
+export default function QuizHistory({ quizHistory, dispatch, setQuizHistory }) {
   return (
     <section className="quiz-history">
       <div className="quiz-history-header">
