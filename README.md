@@ -2,7 +2,7 @@
 
 The React Quiz Application is a web-based quiz game built using React, designed to test users' knowledge on various topics. It features a user-friendly interface, a timer for each question, and maintains a history of quiz attempts.
 
-## [Live Demo](https://react-quiz-tapan31.vercel.app/)
+## [Live Demo](https://react-quiz-three-beta.vercel.app/)
 
 ## Table of Contents
 
